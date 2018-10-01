@@ -110,6 +110,7 @@ func main() {
 			},
 		},
 	})
+*/
 
 	albumType := graphql.NewObject(graphql.ObjectConfig{
 		Name: "Album",
@@ -134,7 +135,7 @@ func main() {
 			},
 		},
 	})
-*/
+
 	rootQuery := graphql.NewObject(graphql.ObjectConfig{
 		Name: "Query",
 		Fields: graphql.Fields{
@@ -153,10 +154,63 @@ func main() {
 					return filtered, nil
 				},
 			},
+
+			"album": &graphql.Field{
+				Type: albumType,
+				Args: graphql.FieldConfigArgument{
+					"id": &graphql.ArgumentConfig{
+						Type: graphql.NewNonNull(graphql.String),
+					},
+				},
+				Resolve: func(params graphql.ResolveParams) (interface{}, error) {
+					id := params.Args["id"].(string)
+					for _, album := range albums {
+						if album.ID == id {
+							return album, nil
+						}
+					}
+					return nil, nil
+				},
+			},
 		},
 	})
 
-	schema, _ := graphql.NewSchema(graphql.SchemaConfig{Query: rootQuery})
+	rootMutation := graphql.NewObject(graphql.ObjectConfig{
+		Name: "Mutation",
+		Fields: graphql.Fields{
+			"createSong": &graphql.Field{
+				Type: songType,
+				Args: graphql.FieldConfigArgument{
+					"id": &graphql.ArgumentConfig{
+						Type: graphql.NewNonNull(graphql.String),
+					},
+					"album": &graphql.ArgumentConfig{
+						Type: graphql.NewNonNull(graphql.String),
+					},
+					"title": &graphql.ArgumentConfig{
+						Type: graphql.NewNonNull(graphql.String),
+					},
+					"duration": &graphql.ArgumentConfig{
+						Type: graphql.NewNonNull(graphql.String),
+					},
+				},
+				Resolve: func(params graphql.ResolveParams) (interface{}, error) {
+					var song Song
+					song.ID = params.Args["id"].(string)
+					song.Album = params.Args["album"].(string)
+					song.Title = params.Args["title"].(string)
+					song.Duration = params.Args["duration"].(string)
+					songs = append(songs, song)
+					return song, nil
+				},
+			},
+		},
+	})
+
+	schema, _ := graphql.NewSchema(graphql.SchemaConfig{
+		Query:      rootQuery,
+		Mutation:   rootMutation,
+	})
 
 	http.HandleFunc("/graphql", func(w http.ResponseWriter, r *http.Request) {
 		result := graphql.Do(graphql.Params{
