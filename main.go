@@ -1,11 +1,11 @@
 package main
 
 import (
-	"encoding/json"
 	"net/http"
 	"log"
 
 	"github.com/graphql-go/graphql"
+	"github.com/graphql-go/handler"
 )
 
 type Heartbeat struct {
@@ -33,13 +33,12 @@ func main() {
 		log.Fatalf("Fail to create new schema, error: %v", err)
 	}
 
-	http.HandleFunc("/heartbeat", func(w http.ResponseWriter, r *http.Request) {
-		result := graphql.Do(graphql.Params{
-			Schema: schema,
-			RequestString: r.URL.Query().Get("query"),
-		})
-		json.NewEncoder(w).Encode(result)
+	h := handler.New(&handler.Config{
+		Schema: &schema,
+		Pretty: true,
+		GraphiQL: true,
 	})
 
+	http.Handle("/heartbeat", h)
 	http.ListenAndServe(":9527", nil)
 }
