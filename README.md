@@ -4,4 +4,4 @@ Basic file hierarchy of graphql API server in golang
 
 ## Example
 
-curl -g 'http://localhost:9527/graphql?query={songs{title,duration}}'
+curl -g 'http://localhost:9527/graphql?query={songs(album:"ts-fearless"){title,duration,id}}'

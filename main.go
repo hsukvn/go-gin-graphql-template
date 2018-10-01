@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"net/http"
+	"strings"
 
 	"github.com/graphql-go/graphql"
 )
@@ -63,6 +64,16 @@ var songs []Song = []Song{
 		Duration: "4:54",
 		Type:     "song",
 	},
+}
+
+func Filter(songs []Song, f func(Song) bool) []Song {
+	vsf := make([]Song, 0)
+	for _, v := range songs {
+		if f(v) {
+			vsf = append(vsf, v)
+		}
+	}
+	return vsf
 }
 
 func main() {
@@ -129,8 +140,17 @@ func main() {
 		Fields: graphql.Fields{
 			"songs": &graphql.Field{
 				Type: graphql.NewList(songType),
+				Args: graphql.FieldConfigArgument{
+					"album": &graphql.ArgumentConfig{
+						Type: graphql.NewNonNull(graphql.String),
+					},
+				},
 				Resolve: func(params graphql.ResolveParams) (interface{}, error) {
-					return songs, nil
+					album := params.Args["album"].(string)
+					filtered := Filter(songs, func(v Song) bool {
+						return strings.Contains(v.Album, album)
+					})
+					return filtered, nil
 				},
 			},
 		},
