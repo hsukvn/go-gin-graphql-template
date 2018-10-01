@@ -6,38 +6,15 @@ import (
 
 	"github.com/graphql-go/graphql"
 	"github.com/graphql-go/handler"
+	"github.com/hsukvn/go-graphql-template/queries"
 )
 
-type Heartbeat struct {
-	Status string `json:"status"`
-}
-
 func main() {
-	heartbeatType := graphql.NewObject(graphql.ObjectConfig{
-		Name: "Heartbeat",
-		Fields: graphql.Fields{
-			"status": &graphql.Field{
-				Type: graphql.String,
-			},
-		},
-	})
-
-	rootQuery := graphql.NewObject(graphql.ObjectConfig{
-		Name: "Query",
-		Fields: graphql.Fields{
-			"heartbeat": &graphql.Field{
-				Type: heartbeatType,
-				Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-					return Heartbeat{
-						Status: "alive",
-					}, nil
-				},
-			},
-		},
-	})
-
 	schema, err := graphql.NewSchema(graphql.SchemaConfig{
-		Query: rootQuery,
+		Query: graphql.NewObject(graphql.ObjectConfig{
+			Name: "Query",
+			Fields: queries.GetRootFields(),
+		}),
 	})
 
 	if err != nil {
