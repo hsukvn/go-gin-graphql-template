@@ -18,15 +18,26 @@ func main() {
 		Fields: graphql.Fields{
 			"status": &graphql.Field{
 				Type: graphql.String,
+			},
+		},
+	})
+
+	rootQuery := graphql.NewObject(graphql.ObjectConfig{
+		Name: "Query",
+		Fields: graphql.Fields{
+			"heartbeat": &graphql.Field{
+				Type: heartbeatType,
 				Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-					return "alive", nil
+					return Heartbeat{
+						Status: "alive",
+					}, nil
 				},
 			},
 		},
 	})
 
 	schema, err := graphql.NewSchema(graphql.SchemaConfig{
-		Query: heartbeatType,
+		Query: rootQuery,
 	})
 
 	if err != nil {
@@ -39,6 +50,6 @@ func main() {
 		GraphiQL: true,
 	})
 
-	http.Handle("/heartbeat", h)
+	http.Handle("/", h)
 	http.ListenAndServe(":9527", nil)
 }
