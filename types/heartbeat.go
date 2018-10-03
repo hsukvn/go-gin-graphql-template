@@ -11,8 +11,6 @@ type Heartbeat struct {
 var HeartbeatType = graphql.NewObject(graphql.ObjectConfig{
 	Name: "Heartbeat",
 	Fields: graphql.Fields{
-		"status": &graphql.Field{
-			Type: graphql.String,
-		},
+		"status": &graphql.Field{Type: graphql.String},
 	},
 })

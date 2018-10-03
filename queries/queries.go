@@ -7,6 +7,7 @@ import (
 func GetRootFields() graphql.Fields {
 	return graphql.Fields{
 		"heartbeat": GetHeartbeatQuery(),
+		"users": GetUserQuery(),
 	}
 }
 
