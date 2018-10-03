@@ -10,6 +10,15 @@ type User struct {
 	Lastname  string `db:"lastname" json:"lastname"`
 }
 
+// FIXME: Mockup data
+var Users []User = []User{
+	User{
+		ID: 1,
+		Firstname: "Kevin",
+		Lastname: "Hsu",
+	},
+}
+
 var UserType = graphql.NewObject(graphql.ObjectConfig{
 	Name: "User",
 	Fields: graphql.Fields{

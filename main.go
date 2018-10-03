@@ -7,6 +7,7 @@ import (
 	"github.com/graphql-go/graphql"
 	"github.com/graphql-go/handler"
 	"github.com/hsukvn/go-graphql-template/queries"
+	"github.com/hsukvn/go-graphql-template/mutations"
 )
 
 func main() {
@@ -14,6 +15,10 @@ func main() {
 		Query: graphql.NewObject(graphql.ObjectConfig{
 			Name: "Query",
 			Fields: queries.GetRootFields(),
+		}),
+		Mutation: graphql.NewObject(graphql.ObjectConfig{
+			Name:   "Mutation",
+			Fields: mutations.GetRootFields(),
 		}),
 	})
 
