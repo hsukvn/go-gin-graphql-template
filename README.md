@@ -25,3 +25,7 @@ POST
 ```
 curl -X POST -H 'Content-Type: application/json' -d '{"query": "mutation { createUser(firstname: \"Mimi\", lastname: \"Lo\") { id,firstname,lastname } }"}' localhost:9527
 ```
+
+# Todo
+
+- [ ] Add auth middleware ([jwt-go](https://github.com/dgrijalva/jwt-go))
