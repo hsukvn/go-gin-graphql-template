@@ -8,14 +8,14 @@ GET
 
 ```
 curl -g 'http://localhost:9527/?query={heartbeat{status}}'
-curl -g 'http://localhost:9527/?query={user{id,firstname,roles{id,name}}}'
+curl -g 'http://localhost:9527/?query={users{id,firstname,roles{id,name}}}'
 ```
 
 POST
 
 ```
 curl -X POST -H 'Content-Type: application/json' -d '{"query": "{ heartbeat { status } }"}' localhost:9527
-curl -X POST -H 'Content-Type: application/json' -d '{"query": "{ user { id,firstname,roles { id,name } } }"}' localhost:9527
+curl -X POST -H 'Content-Type: application/json' -d '{"query": "{ users { id,firstname,roles { id,name } } }"}' localhost:9527
 ```
 
 ## Mutation

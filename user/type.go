@@ -1,43 +1,31 @@
-package types
+package user
 
 import (
 	"github.com/graphql-go/graphql"
+	"github.com/hsukvn/go-graphql-template/user/role"
 )
 
-type User struct {
+type user struct {
 	ID        int    `db:"id" json:"id"`
 	Firstname string `db:"firstname" json:"firstname"`
 	Lastname  string `db:"lastname" json:"lastname"`
 }
 
 // FIXME: Mockup data
-var Users []User = []User{
-	User{
+var users []user = []user{
+	user{
 		ID: 1,
 		Firstname: "Kevin",
 		Lastname: "Hsu",
 	},
 }
 
-var UserType = graphql.NewObject(graphql.ObjectConfig{
+var userType = graphql.NewObject(graphql.ObjectConfig{
 	Name: "User",
 	Fields: graphql.Fields{
 		"id":         &graphql.Field{Type: graphql.Int},
 		"firstname":  &graphql.Field{Type: graphql.String},
 		"lastname":   &graphql.Field{Type: graphql.String},
-		"roles":      &graphql.Field{
-			Type: graphql.NewList(RoleType),
-			Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-				// FIXME: Mockup data
-				var roles []Role = []Role{
-					Role{
-						ID: 1,
-						Name: "Research and Design",
-					},
-				}
-
-				return roles, nil
-			},
-		},
+		"roles":      role.RolesQueryFieldGet(),
 	},
 })

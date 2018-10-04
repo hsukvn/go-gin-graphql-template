@@ -6,19 +6,24 @@ import (
 
 	"github.com/graphql-go/graphql"
 	"github.com/graphql-go/handler"
-	"github.com/hsukvn/go-graphql-template/queries"
-	"github.com/hsukvn/go-graphql-template/mutations"
+	"github.com/hsukvn/go-graphql-template/heartbeat"
+	"github.com/hsukvn/go-graphql-template/user"
 )
 
 func main() {
 	schema, err := graphql.NewSchema(graphql.SchemaConfig{
 		Query: graphql.NewObject(graphql.ObjectConfig{
 			Name: "Query",
-			Fields: queries.GetRootFields(),
+			Fields: graphql.Fields{
+				"heartbeat": heartbeat.HeartbeatQueryFieldGet(),
+				"users":     user.UsersQueryFieldGet(),
+			},
 		}),
 		Mutation: graphql.NewObject(graphql.ObjectConfig{
 			Name:   "Mutation",
-			Fields: mutations.GetRootFields(),
+			Fields: graphql.Fields{
+				"createUser": user.CreateUserMutationFieldGet(),
+			},
 		}),
 	})
 
