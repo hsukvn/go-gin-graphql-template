@@ -8,6 +8,6 @@ import (
 
 type PingController struct{}
 
-func (pc PingController) GetController(c *gin.Context) {
+func (ctr *PingController) GetController(c *gin.Context) {
 	c.String(http.StatusOK, "pong")
 }

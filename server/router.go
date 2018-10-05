@@ -2,7 +2,7 @@ package server
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/hsukvn/go-graphql-template/controller"
+	"github.com/hsukvn/go-gin-graphql-template/controller"
 )
 
 func SetupRouter() *gin.Engine {

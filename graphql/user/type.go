@@ -2,7 +2,7 @@ package user
 
 import (
 	"github.com/graphql-go/graphql"
-	"github.com/hsukvn/go-graphql-template/graphql/user/role"
+	"github.com/hsukvn/go-gin-graphql-template/graphql/user/role"
 )
 
 type user struct {

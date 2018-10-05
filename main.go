@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/hsukvn/go-graphql-template/server"
+	"github.com/hsukvn/go-gin-graphql-template/server"
 )
 
 func main() {

@@ -1,4 +1,4 @@
-# go-graphql-template
+# go-gin-graphql-template
 
 Basic file hierarchy of graphql API server in golang
 
