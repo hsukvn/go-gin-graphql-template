@@ -4,11 +4,11 @@ import (
 	"github.com/graphql-go/graphql"
 )
 
-func usersResolveGet(p graphql.ResolveParams) (interface{}, error) {
+func usersResolve(p graphql.ResolveParams) (interface{}, error) {
 	return users, nil
 }
 
-func createUserResolveGet(p graphql.ResolveParams) (interface{}, error) {
+func createUserResolve(p graphql.ResolveParams) (interface{}, error) {
 	u := user{
 		ID:        len(users)+1,
 		Firstname: p.Args["firstname"].(string),

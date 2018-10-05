@@ -4,14 +4,14 @@ import (
 	"github.com/graphql-go/graphql"
 )
 
-func UsersQueryFieldGet() *graphql.Field {
+func GetUsersQueryField() *graphql.Field {
 	return &graphql.Field{
 		Type:    graphql.NewList(userType),
-		Resolve: usersResolveGet,
+		Resolve: usersResolve,
 	}
 }
 
-func CreateUserMutationFieldGet() *graphql.Field {
+func GetCreateUserMutationField() *graphql.Field {
 	return &graphql.Field{
 		Type: userType,
 		Args: graphql.FieldConfigArgument{
@@ -22,6 +22,6 @@ func CreateUserMutationFieldGet() *graphql.Field {
 				Type: graphql.NewNonNull(graphql.String),
 			},
 		},
-		Resolve: createUserResolveGet,
+		Resolve: createUserResolve,
 	}
 }
