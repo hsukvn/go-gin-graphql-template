@@ -12,6 +12,7 @@ func SetupRouter() *gin.Engine {
 	graphql := new(controller.GraphqlController)
 
 	r.GET("/ping", ping.GetController)
+	r.GET("/graphql", gin.WrapF(graphql.NewGraphiQLHandlerFunc()))
 	r.POST("/graphql", gin.WrapH(graphql.NewHandler()))
 
 	return r

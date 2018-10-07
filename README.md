@@ -18,18 +18,24 @@ curl http://localhost:9527/ping
 
 ##### Query
 
+Get user
+
+```
+curl -X POST -H 'Content-Type: application/json' -d '{"query": "{ user(id:1) { firstname,roles { id,name } } }"}' localhost:9527/graphql
+```
+
 Get users
 
 ```
-curl -X POST -H 'Content-Type: application/json' -d '{"query": "{ users { id,firstname,roles { id,name } } }"}' localhost:9527
+curl -X POST -H 'Content-Type: application/json' -d '{"query": "{ users { id,firstname,roles { id,name } } }"}' localhost:9527/graphql
 ```
 
 ##### Mutation
 
-Create user
+Add user
 
 ```
-curl -X POST -H 'Content-Type: application/json' -d '{"query": "mutation { createUser(firstname: \"Mimi\", lastname: \"Lo\") { id,firstname,lastname } }"}' localhost:9527
+curl -X POST -H 'Content-Type: application/json' -d '{"query": "mutation { addUser(firstname: \"Mimi\", lastname: \"Lo\", roles: [\"Archeologist\"]) { id,firstname,lastname,roles { id,name } } }"}' localhost:9527/graphql
 ```
 
 ## Todo
