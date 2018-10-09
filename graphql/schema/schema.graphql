@@ -10,15 +10,3 @@ type Query {
 type Mutation {
     addUser(firstname: String!, lastname: String!, roles:[String]!): User
 }
-
-type User {
-    id: Int
-    firstname: String
-    lastname: String
-    roles: [Role]
-}
-
-type Role {
-    id: Int
-    name: String
-}

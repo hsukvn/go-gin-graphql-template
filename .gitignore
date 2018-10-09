@@ -1,1 +1,2 @@
-main
+/main
+/graphql/schema/bindata.go

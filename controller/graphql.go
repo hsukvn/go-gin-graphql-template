@@ -1,28 +1,20 @@
 package controller
 
 import (
-	"log"
 	"net/http"
 
 	graphql "github.com/graph-gophers/graphql-go"
 	"github.com/graph-gophers/graphql-go/relay"
+	"github.com/hsukvn/go-gin-graphql-template/graphql/schema"
 	"github.com/hsukvn/go-gin-graphql-template/graphql/resolver"
-	"github.com/hsukvn/go-gin-graphql-template/lib/util"
 )
 
 type GraphqlController struct{}
 
 func (ctr *GraphqlController) NewHandler() *relay.Handler {
-	s, err := util.LoadSchema("graphql/schema/schema.graphql")
+	s := graphql.MustParseSchema(schema.String(), &resolver.Resolver{})
 
-	if err != nil {
-		log.Fatalf("Fail to get schema, error: %v", err)
-		return nil
-	}
-
-	schema := graphql.MustParseSchema(s, &resolver.Resolver{})
-
-	return &relay.Handler{Schema: schema}
+	return &relay.Handler{Schema: s}
 }
 
 func (ctr *GraphqlController) NewGraphiQLHandlerFunc() http.HandlerFunc {

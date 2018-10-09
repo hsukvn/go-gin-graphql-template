@@ -2,6 +2,35 @@
 
 Basic file hierarchy of graphql API server in golang
 
+## Requirement
+
+* golang installed
+* go-bindata installed
+
+```
+go get -u github.com/jteeuwen/go-bindata/...
+```
+
+* add $GOPATH/bin to $PATH
+
+```
+export PATH=$PATH:$GOPATH/bin
+```
+
+## Usage
+
+* generate schema
+
+```
+go-bindata -ignore=\.go -pkg=schema -o=graphql/schema/bindata.go graphql/schema/...
+```
+
+* run or build `main.go`
+
+```
+go run main.go
+```
+
 ## Controllers
 
 ### Ping
