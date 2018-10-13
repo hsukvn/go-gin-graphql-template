@@ -43,25 +43,41 @@ curl http://localhost:9527/ping
 
 ### Graphql
 
-#### User
+#### Scalar
 
-##### Query
+##### Int64
 
-Get user
+This scalar type is an example showing how to add a custom scalar type and use it.`
+
+The default int type of graphQL is 32-bit
 
 ```
-curl -X POST -H 'Content-Type: application/json' -d '{"query": "{ user(id:1) { firstname,roles { id,name } } }"}' localhost:9527/graphql
+ The Int scalar type represents a signed 32‐bit numeric non‐fractional value. Response formats that support a 32‐bit integer or a number type should use that type to represent this scalar.
 ```
 
-Get users
+So becareful using this type.
+
+#### Resolver
+
+##### User
+
+###### Query
+
+* Get user
+
+```
+curl -X POST -H 'Content-Type: application/json' -d '{"query": "{ user(id:2047483648) { firstname,roles { id,name } } }"}' localhost:9527/graphql
+```
+
+* Get users
 
 ```
 curl -X POST -H 'Content-Type: application/json' -d '{"query": "{ users { id,firstname,roles { id,name } } }"}' localhost:9527/graphql
 ```
 
-##### Mutation
+###### Mutation
 
-Add user
+* Add user
 
 ```
 curl -X POST -H 'Content-Type: application/json' -d '{"query": "mutation { addUser(firstname: \"Mimi\", lastname: \"Lo\", roles: [\"Archeologist\"]) { id,firstname,lastname,roles { id,name } } }"}' localhost:9527/graphql

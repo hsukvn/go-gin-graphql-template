@@ -5,6 +5,7 @@ type User struct {
 	Firstname string  `json:"firstname"`
 	Lastname  string  `json:"lastname"`
 	Roles     []*Role `json:"roles"`
+	Deposit   int64   `json:"deposit"`
 }
 
 // FIXME: Mockup data
@@ -19,5 +20,6 @@ var UserData = []User{
 				Name: "Research and Design",
 			},
 		},
+		Deposit: 2147483648,
 	},
 }

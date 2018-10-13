@@ -2,6 +2,7 @@ package resolver
 
 import (
 	"github.com/hsukvn/go-gin-graphql-template/graphql/model"
+	"github.com/hsukvn/go-gin-graphql-template/graphql/scalar"
 )
 
 type userResolver struct {
@@ -30,4 +31,9 @@ func (r *userResolver) Roles() *[]*roleResolver {
 	}
 
 	return &roles
+}
+
+func (r *userResolver) Deposit() *scalar.Int64 {
+	d := scalar.Int64(r.user.Deposit)
+	return &d
 }

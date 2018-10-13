@@ -3,4 +3,5 @@ type User {
     firstname: String
     lastname: String
     roles: [Role]
+    deposit: Int64
 }

@@ -1,4 +1,4 @@
 type Role {
-    id: Int64
+    id: Int
     name: String
 }

@@ -17,17 +17,18 @@ func (r *Resolver) AddUser(ctx context.Context, args addUserArgs) (*userResolver
 
 	for i, r := range args.Roles {
 		roles = append(roles, &model.Role{
-			ID:   int32(len(model.UserData) + i + 1),
+			ID:   int32(len(model.UserData)) + int32(i) + 1,
 			Name: *r,
 		})
 	}
 
 	u := userResolver{
 		user: &model.User{
-			ID:        int32(len(model.UserData) + 1),
+			ID:        int32(len(model.UserData)) + 1,
 			Firstname: args.Firstname,
 			Lastname:  args.Lastname,
 			Roles:     roles,
+			Deposit:   0,
 		},
 	}
 
