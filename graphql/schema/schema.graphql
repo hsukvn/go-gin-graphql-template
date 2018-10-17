@@ -3,10 +3,10 @@ schema {
     mutation: Mutation
 }
 type Query {
-    user(id: Int!): User
+    user(uid: ID!): User
+    userByName(name: String!): User
     users: [User]
 }
 
 type Mutation {
-    addUser(firstname: String!, lastname: String!, roles:[String]!): User
 }

@@ -1,0 +1,4 @@
+type Group {
+    gid: ID
+    name: String
+}

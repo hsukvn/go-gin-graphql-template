@@ -1,6 +1,6 @@
 # go-gin-graphql-template
 
-Basic file hierarchy of graphql API server in golang
+GraphQL API server in golang to get linux system info.
 
 ## Requirement
 
@@ -50,22 +50,63 @@ curl http://localhost:9527/ping
 Get user
 
 ```
-curl -X POST -H 'Content-Type: application/json' -d '{"query": "{ user(id:1) { firstname,roles { id,name } } }"}' localhost:9527/graphql
+query {
+    user(uid: "0") {
+        uid
+        gid
+        name
+        home
+        groups {
+            gid
+            name
+        }
+
+    }
+}
+```
+
+Get user by user name
+
+```
+query {
+    userByName(name: "root") {
+        uid
+        gid
+        name
+        home
+        groups {
+            gid
+            name
+        }
+
+    }
+}
 ```
 
 Get users
 
 ```
-curl -X POST -H 'Content-Type: application/json' -d '{"query": "{ users { id,firstname,roles { id,name } } }"}' localhost:9527/graphql
+query {
+    users {
+        uid
+        gid
+        name
+        home
+        groups {
+            gid
+            name
+        }
+
+    }
+}
 ```
 
-##### Mutation
-
-Add user
+## Query using curl
 
 ```
-curl -X POST -H 'Content-Type: application/json' -d '{"query": "mutation { addUser(firstname: \"Mimi\", lastname: \"Lo\", roles: [\"Archeologist\"]) { id,firstname,lastname,roles { id,name } } }"}' localhost:9527/graphql
+curl -X POST -H 'Content-Type: application/json' -d '{"query": "{ user(uid:\"0\") { uid, gid, name, home, groups { gid, name } } }"}' localhost:9527/graphql
 ```
+
 
 ## Todo
 

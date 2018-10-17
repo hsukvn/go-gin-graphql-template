@@ -1,23 +1,64 @@
 package model
 
+import (
+	"os/user"
+)
+
 type User struct {
-	ID        int32   `json:"id"`
-	Firstname string  `json:"firstname"`
-	Lastname  string  `json:"lastname"`
-	Roles     []*Role `json:"roles"`
+	UID    string   `json:"uid"`
+	GID    string   `json:"gid"`
+	Name   string   `json:"name"`
+	Home   string   `json:"home"`
+	Groups []*Group `json:"groups"`
 }
 
-// FIXME: Mockup data
-var UserData = []User{
-	User{
-		ID:        1,
-		Firstname: "Kevin",
-		Lastname:  "Hsu",
-		Roles: []*Role{
-			&Role{
-				ID:   1,
-				Name: "Research and Design",
-			},
-		},
-	},
+func NewUserByUID(uid string) (*User, error) {
+	u, err := user.LookupId(uid)
+	if err != nil {
+		return nil, err
+	}
+
+	return NewUser(u)
+}
+
+func NewUserByName(name string) (*User, error) {
+	u, err := user.Lookup(name)
+	if err != nil {
+		return nil, err
+	}
+
+	return NewUser(u)
+}
+
+func NewUser(u *user.User) (*User, error) {
+	gids, err := u.GroupIds()
+	if err != nil {
+		return nil, err
+	}
+
+	return &User{
+		UID:    u.Uid,
+		GID:    u.Gid,
+		Name:   u.Name,
+		Home:   u.HomeDir,
+		Groups: getGroups(gids),
+	}, nil
+}
+
+func getGroups(gids []string) []*Group {
+	modelGroups := make([]*Group, len(gids))
+
+	for i, id := range gids {
+		g, err := user.LookupGroupId(id)
+		if err != nil {
+			continue
+		}
+
+		modelGroups[i] = &Group{
+			GID:  g.Gid,
+			Name: g.Name,
+		}
+	}
+
+	return modelGroups
 }
