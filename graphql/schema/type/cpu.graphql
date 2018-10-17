@@ -1,0 +1,8 @@
+type CPU {
+    id: ID
+    total: Uint64
+    user: Uint64
+    system: Uint64
+    idle: Uint64
+    iowait: Uint64
+}

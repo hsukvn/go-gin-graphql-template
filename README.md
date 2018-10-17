@@ -45,8 +45,6 @@ curl http://localhost:9527/ping
 
 #### User
 
-##### Query
-
 Get user
 
 ```
@@ -100,6 +98,40 @@ query {
     }
 }
 ```
+
+#### CPU
+
+Get CPU
+
+```
+query {
+    cpu(id:"cpu1") {
+        id
+        total
+        user
+        system
+        idle
+        iowait
+    }
+}
+```
+
+Get CPUs
+
+```
+query {
+    cpus {
+        id
+        total
+        user
+        system
+        idle
+        iowait
+    }
+}
+```
+
+
 
 ## Query using curl
 
