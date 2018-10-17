@@ -13,7 +13,12 @@ type Query {
     memory: Memory
     ifaces: [Iface]
     iface(name: String!): Iface
+    service(name: String!): Service
 }
 
 type Mutation {
+    startService(name: String!): Service
+    stopService(name: String!): Service
+    enableService(name: String!): Service
+    disableService(name: String!): Service
 }

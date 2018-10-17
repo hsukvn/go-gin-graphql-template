@@ -1,0 +1,6 @@
+type Service {
+    name: String
+    mainPID: Uint64
+    activeState: Int
+    unitFileState: Int
+}

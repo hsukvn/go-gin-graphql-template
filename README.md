@@ -195,6 +195,73 @@ query {
 }
 ```
 
+#### Service
+
+Get service
+
+```
+query {
+    service (name: "smb") {
+        name
+        mainPID
+        activeState
+        unitFileState
+    }
+}
+```
+
+Start service
+
+```
+mutation {
+	startService (name: "smb") {
+        name
+        mainPID
+        activeState
+        unitFileState
+  }
+}
+```
+
+Stop service
+
+```
+mutation {
+    stopService (name: "smb") {
+        name
+        mainPID
+        activeState
+        unitFileState
+    }
+}
+```
+
+Enable service
+
+```
+mutation {
+    enableService (name: "smb") {
+        name
+        mainPID
+        activeState
+        unitFileState
+    }
+}
+```
+
+Disable service
+
+```
+mutation {
+    disableService (name: "smb") {
+        name
+        mainPID
+        activeState
+        unitFileState
+    }
+}
+```
+
 ## Query using curl
 
 ```
