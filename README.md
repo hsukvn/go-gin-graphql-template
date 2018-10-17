@@ -131,14 +131,29 @@ query {
 }
 ```
 
+#### Memory
 
+Get Memory
+
+```
+query {
+    memory {
+        total
+        free
+        used
+        shared
+        buffer
+        cache
+        swap
+    }
+}
+```
 
 ## Query using curl
 
 ```
 curl -X POST -H 'Content-Type: application/json' -d '{"query": "{ user(uid:\"0\") { uid, gid, name, home, groups { gid, name } } }"}' localhost:9527/graphql
 ```
-
 
 ## Todo
 

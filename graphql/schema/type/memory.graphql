@@ -1,0 +1,9 @@
+type Memory {
+    total: Uint64
+    free: Uint64
+    used: Uint64
+    shared: Uint64
+    buffer: Uint64
+    cache: Uint64
+    swap: Uint64
+}

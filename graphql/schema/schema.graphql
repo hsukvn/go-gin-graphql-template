@@ -10,6 +10,7 @@ type Query {
     users: [User]
     cpu(id: ID!): CPU
     cpus: [CPU]
+    memory: Memory
 }
 
 type Mutation {
