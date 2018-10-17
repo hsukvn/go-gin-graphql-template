@@ -11,6 +11,8 @@ type Query {
     cpu(id: ID!): CPU
     cpus: [CPU]
     memory: Memory
+    ifaces: [Iface]
+    iface(name: String!): Iface
 }
 
 type Mutation {

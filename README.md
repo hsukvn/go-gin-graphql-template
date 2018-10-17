@@ -149,6 +149,52 @@ query {
 }
 ```
 
+#### Network Iface
+
+Get Iface
+
+```
+query {
+    iface(name: "eno1") {
+        name
+        mac
+        addrv4 {
+            ip
+            mask
+        }
+        addrv6 {
+            ip
+            mask
+        }
+        mtu
+        rx
+        tx
+    }
+}
+```
+
+Get Ifaces
+
+```
+query {
+    ifaces {
+        name
+        mac
+        addrv4 {
+            ip
+            mask
+        }
+        addrv6 {
+            ip
+            mask
+        }
+        mtu
+        rx
+        tx
+    }
+}
+```
+
 ## Query using curl
 
 ```

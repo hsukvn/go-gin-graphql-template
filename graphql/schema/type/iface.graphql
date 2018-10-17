@@ -1,0 +1,9 @@
+type Iface {
+    name: String
+    mac: String
+    addrv4: [Addr]
+    addrv6: [Addr]
+    mtu: Int
+    rx: Uint64
+    tx: Uint64
+}
