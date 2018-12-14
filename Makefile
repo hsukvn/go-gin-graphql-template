@@ -9,7 +9,7 @@ setup:
 	go get -u github.com/jteeuwen/go-bindata/...
 
 build: $(GRAPHQL_SCHEMA_BINDATA)
-	go build main.go
+	go build
 
 run: $(GRAPHQL_SCHEMA_BINDATA)
 	go run main.go

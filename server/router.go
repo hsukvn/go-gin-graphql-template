@@ -80,7 +80,7 @@ func getAuthMiddleware() (*jwt.GinJWTMiddleware, error) {
 	return authMiddleware, nil
 }
 
-func SetupRouter() *gin.Engine {
+func newRouter(c *RouterConfig) *gin.Engine {
 	r := gin.Default()
 
 	authMiddleware, err := getAuthMiddleware()

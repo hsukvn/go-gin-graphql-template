@@ -15,6 +15,7 @@ export PATH=$PATH:$GOPATH/bin
 
 ```
 go get github.com/msteinert/pam
+go get github.com/spf13/cobra
 ```
 
 * [option] install httpie
@@ -38,6 +39,18 @@ make run
 ```
 make
 ```
+
+## Daemon Flags
+
+```
+Flags:
+  -d, --debug          debug mode
+      --disable-auth   disable auth middleware
+  -h, --help           help for graphql-server
+  -p, --port int       port number (default 9527)
+```
+
+** graphiql is only available when disable auth middleware **
 
 ## Controllers
 
