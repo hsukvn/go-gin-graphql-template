@@ -11,6 +11,14 @@ GraphQL API server in golang to get linux system info.
 export PATH=$PATH:$GOPATH/bin
 ```
 
+* install go packages
+
+```
+go get github.com/msteinert/pam
+```
+
+* [option] install httpie
+
 ## Usage
 
 * install go-bindata
@@ -39,6 +47,22 @@ To check whether server is alive
 
 ```
 curl http://localhost:9527/ping
+```
+
+### Login
+
+Get auth token
+
+```
+http -v --json POST localhost:9527/login name=kevin passwd=somepassword
+```
+
+### Refresh Token
+
+Refresh token before token expire
+
+```
+http -v -f POST localhost:9527/refresh_token "Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1NDQ2MDkwNDAsIm5hbWUiOiJyb290Iiwib3JpZ19pYXQiOjE1NDQ2MDU0NDB9.a1DZTB17HXJrC
 ```
 
 ### Graphql
@@ -270,4 +294,4 @@ curl -X POST -H 'Content-Type: application/json' -d '{"query": "{ user(uid:\"0\"
 
 ## Todo
 
-- [ ] Add auth middleware ([jwt-go](https://github.com/dgrijalva/jwt-go))
+- [x] Add auth middleware ([gin-jwt](https://github.com/appleboy/gin-jwt))

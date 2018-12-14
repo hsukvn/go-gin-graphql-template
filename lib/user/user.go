@@ -5,6 +5,8 @@ import (
 	"io"
 	"os"
 	"strings"
+
+	"github.com/msteinert/pam"
 )
 
 const etcPasswdPath = "/etc/passwd"
@@ -39,4 +41,20 @@ func ListUsers() ([]string, error) {
 	}
 
 	return users, nil
+}
+
+func AuthenticateUser(name, passwd string) error {
+	t, err := pam.StartFunc("", name, func(s pam.Style, msg string) (string, error) {
+		return passwd, nil
+	})
+	if err != nil {
+		return err
+	}
+
+	err = t.Authenticate(0)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
