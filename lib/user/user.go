@@ -55,6 +55,9 @@ func AuthenticateUser(name, passwd string) error {
 	if err != nil {
 		return err
 	}
-
+	err = t.AcctMgmt(0)
+	if err != nil {
+		return err
+	}
 	return nil
 }
